@@ -2,30 +2,35 @@
 <html>
 <script src="https://aframe.io/releases/0.9.0/aframe.min.js"></script>
 <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.6.2/aframe/build/aframe-ar.js"></script>
-  <script>
-	  AFRAME.registerComponent('markerhandler', {
+<script>
+  AFRAME.registerComponent('markerhandler', {
+    init: function () {
+      const animatedMarker = document.querySelector("#animated-marker");
+      // every click, we make our model grow in size :)
+      animatedMarker.addEventListener('click', function () {
+        var e = document.getElementById("animated-model");
+        if (e)
+          e.style.display = 'block';
+        else
+          e.style.display = 'none';
+      });
+    }
+  });
+</script>
 
-    init: function() {
-        const animatedMarker = document.querySelector("#animated-marker");
-        const aEntity = document.querySelector("#animated-model");
-
-        // every click, we make our model grow in size :)
-        animatedMarker.addEventListener('click', function(){
-            alert("clicked");
-        });
-}});
-  </script>
-  <body style='margin : 0px; overflow: hidden;'>
-    <div style="position: fixed; top: 10px; width:100%; text-align: center; z-index: 1;" id="animated-model">
-		<button>
-     HIDE OBJECTS
+<body style='margin : 0px; overflow: hidden;'>
+  <div style="position: fixed; top: 10px; width:100%; text-align: center; z-index: 1; display: none"
+    id="animated-model">
+    <button>
+      HIDE OBJECTS
     </button>
-	</div>
-    <a-scene embedded arjs='debugUIEnabled: false;trackingMethod: best;'>
-  	<a-marker markerhandler emitevents="true" cursor="rayOrigin: mouse" preset="hiro" id="animated-marker">
-            <a-box position='0 0.5 0' material='opacity: 0.5;'></a-box>
-  	</a-marker>
-  	<a-entity camera></a-entity>
-    </a-scene>
-  </body>
+  </div>
+  <a-scene embedded arjs='debugUIEnabled: false;trackingMethod: best;'>
+    <a-marker markerhandler emitevents="true" cursor="rayOrigin: mouse" preset="hiro" id="animated-marker">
+      <a-box position='0 0.5 0' material='opacity: 0.5;'></a-box>
+    </a-marker>
+    <a-entity camera></a-entity>
+  </a-scene>
+</body>
+
 </html>
