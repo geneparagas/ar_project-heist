@@ -29,8 +29,17 @@
     </button>
   </div>
   <a-scene embedded arjs='debugUIEnabled: false;trackingMethod: best;'>
+    
+    <a-assets>
+            <a-asset-item id="animated-asset" src="https://raw.githubusercontent.com/nicolocarpignoli/nicolocarpignoli.github.io/master/ar-click-events/models/CesiumMan.gltf"></a-asset-item>
+        </a-assets>
+    
     <a-marker markerhandler emitevents="true" cursor="rayOrigin: mouse" preset="hiro" id="animated-marker">
-      <a-box id="animated-model" position='0 0.5 0' material='opacity: 0.5;'></a-box>
+      <a-entity
+                id="animated-model"
+                gltf-model="#animated-asset"
+                scale="2">
+            </a-entity>
     </a-marker>
     <a-entity camera></a-entity>
   </a-scene>
