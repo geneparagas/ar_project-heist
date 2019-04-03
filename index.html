@@ -3,18 +3,26 @@
 <script src="https://aframe.io/releases/0.9.0/aframe.min.js"></script>
 <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.6.2/aframe/build/aframe-ar.js"></script>
   <script>
-  document.querySelector("button").addEventListener("click", (e)=>{
-	console.log("HIDE OBJECTS")
-})
+	  AFRAME.registerComponent('markerhandler', {
+
+    init: function() {
+        const animatedMarker = document.querySelector("#animated-marker");
+        const aEntity = document.querySelector("#animated-model");
+
+        // every click, we make our model grow in size :)
+        animatedMarker.addEventListener('click', function(ev, target){
+            $("#animated-model").hide();
+        });
+}});
   </script>
   <body style='margin : 0px; overflow: hidden;'>
-    <div style='position: fixed; top: 10px; width:100%; text-align: center; z-index: 1;'>
+    <div style="position: fixed; top: 10px; width:100%; text-align: center; z-index: 1;" id="animated-model">
 		<button>
      HIDE OBJECTS
     </button>
 	</div>
     <a-scene embedded arjs='debugUIEnabled: false;trackingMethod: best;'>
-  	<a-marker preset="hiro">
+  	<a-marker animatedMarker preset="hiro" id="animated-marker">
             <a-box position='0 0.5 0' material='opacity: 0.5;'></a-box>
   	</a-marker>
   	<a-entity camera></a-entity>
