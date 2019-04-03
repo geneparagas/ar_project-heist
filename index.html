@@ -9,7 +9,7 @@
       // every click, we make our model grow in size :)
       animatedMarker.addEventListener('click', function () {
         var e = document.getElementById("animated-model");
-        if (e)
+        if (e.style.display == 'none')
           e.style.display = 'block';
         else
           e.style.display = 'none';
