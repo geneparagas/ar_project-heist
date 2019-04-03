@@ -6,28 +6,31 @@
   AFRAME.registerComponent('markerhandler', {
     init: function () {
       const animatedMarker = document.querySelector("#animated-marker");
+      const aEntity = document.querySelector("#animated-model");
       // every click, we make our model grow in size :)
-      animatedMarker.addEventListener('click', function () {
-        var e = document.getElementById("animated-model");
-        if (e.style.display == 'none')
-          e.style.display = 'block';
-        else
-          e.style.display = 'none';
+      animatedMarker.addEventListener('click', function (ev, target) {
+        const intersectedElement = ev && ev.detail && ev.detail.intersectedEl;
+        if (aEntity && intersectedElement === aEntity) {
+          var e = document.getElementById("box");
+          if (e)
+            e.style.display = 'block';
+          else
+            e.style.display = 'none';
+        }
       });
     }
   });
 </script>
 
 <body style='margin : 0px; overflow: hidden;'>
-  <div style="position: fixed; top: 10px; width:100%; text-align: center; z-index: 1"
-    >
-    <button id="animated-model" style="display: none">
+  <div style="position: fixed; top: 10px; width:100%; text-align: center; z-index: 1; display: none" id="box">
+    <button>
       HIDE OBJECTS
     </button>
   </div>
   <a-scene embedded arjs='debugUIEnabled: false;trackingMethod: best;'>
     <a-marker markerhandler emitevents="true" cursor="rayOrigin: mouse" preset="hiro" id="animated-marker">
-      <a-box position='0 0.5 0' material='opacity: 0.5;'></a-box>
+      <a-box id="animated-model" position='0 0.5 0' material='opacity: 0.5;'></a-box>
     </a-marker>
     <a-entity camera></a-entity>
   </a-scene>
