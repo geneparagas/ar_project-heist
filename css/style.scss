@@ -1,0 +1,56 @@
+@mixin on-circle($item-count, $circle-size, $item-size) {
+  position: relative;
+  width: $circle-size;
+  height: $circle-size;
+  border-radius: 50%;
+  padding: 0;
+  list-style: none;
+
+  > * {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -($item-size / 2);
+    width: $item-size;
+
+    $angle: (360 / $item-count);
+    $rot: 0;
+
+    @for $i from 1 through $item-count {
+      &:nth-of-type(#{$i}) {
+        transform: rotate($rot * 1deg) translate($circle-size / 2) rotate(270deg);
+      }
+
+      $rot: $rot + $angle;
+    }
+  }
+}
+
+li.active {
+  background: blue;
+}
+
+li {
+  display: inline-block;
+  width: 6px;
+  height: 20px;
+}
+
+.lose {
+  background: green;
+}
+
+.unlocked {
+	background: orange;
+}
+
+.win {
+  background: red;
+}
+
+ul {
+  @include on-circle($item-count: 80, $circle-size: 15em, $item-size: 6px);
+  padding: 0;
+  margin: 0 auto;
+}
