@@ -11,7 +11,7 @@
     init: function () {
       const animatedMarker = document.querySelector("#animated-marker");
       const aEntity = document.querySelector("#animated-model");
-      // every click, we make our model grow in size :)
+
       animatedMarker.addEventListener('click', function (ev, target) {
         const intersectedElement = ev && ev.detail && ev.detail.intersectedEl;
         if (aEntity && intersectedElement === aEntity) {
@@ -27,7 +27,7 @@
 </script>
 
 <body style='margin : 0px; overflow: hidden;'>
-  <div style="position: fixed; top: 10px; width:100%; text-align: center; z-index: 1; display: none" id="box">
+  <div style="position: fixed; top: 0; height: 100%; width:100%; text-align: center; z-index: 1; right: 0; left: 0; background: #ffffff; display: none" id="box">
     <div class="wrapper">
       <div class="container-fluid">
         <div class="col-lg-3 col-md-6 p-2 my-4 mx-auto">
